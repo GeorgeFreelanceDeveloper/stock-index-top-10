@@ -4,7 +4,7 @@ import datetime
 # endregion
 
 ## Trend follow strategy selecting the top 10 companies from the stock index with weekly/monthly rebalancing equally weighted.
-class StockIndexTop10_V1(QCAlgorithm):
+class StockIndexTop10_V2(QCAlgorithm):
 
     INDEXES = {
             "S&P500": ["NVDA","MSFT","AAPL","AMZN","META","AVGO","GOOGL","BRK.B","TSLA", "GOOG"], # https://finance.yahoo.com/quote/SPY/holdings/
@@ -19,18 +19,23 @@ class StockIndexTop10_V1(QCAlgorithm):
         # ********************************
         index = self.get_parameter("index", "S&P500 MOMENTUM")
         rebalancing_frequency = self.get_parameter("rebalancing_frequency","weekly")
+        self.enable_filter = True if (self.get_parameter("enable_filter", "True") == "True") else False
 
         # Basic settings
         self.symbols = self.INDEXES[index]
+        self.benchmark_symbol = self.get_parameter("benchmark_symbol", "SPMO")
+        self.add_equity(self.benchmark_symbol, Resolution.DAILY)
+        self.benchmark_sma200 = self.sma(self.benchmark_symbol, 200)
 
         # ********************************
         # Algorithm settings
         # ********************************
 
         # Basic
-        self.set_start_date(datetime.date.today().year - 10, 1, 1)
+        self.set_start_date(datetime.date.today().year - 8, 1, 1)
         self.set_cash(10000)
         self.markets = {symbol: self.add_equity(symbol, Resolution.DAILY) for symbol in self.symbols}
+        self.enable_trading = True
 
         rebalancing_frequency_internal = self.DateRules.MonthStart(self.symbols[0])
         match rebalancing_frequency:
@@ -50,10 +55,23 @@ class StockIndexTop10_V1(QCAlgorithm):
         )
 
     def on_data(self, data: Slice):
-        pass
+        if self.enable_filter:
+            # Safely check if benchmark_symbol exists in data.bars before accessing it
+            if self.benchmark_symbol in data.bars:
+                bar_benchmark = data.bars[self.benchmark_symbol]
+                if bar_benchmark.close < self.benchmark_sma200[1].value:
+                    self.enable_trading = False
+                else:
+                    self.enable_trading = True
+        else:
+            # Optionally add logging/debugging to help trace missing data
+            self.debug(f"No data for {self.benchmark_symbol} at {self.time}. Skipping filter this bar.")
 
     def _rebalance_portfolio(self):
-        self.liquidate()
-        for symbol in self.symbols:
-            self.set_holdings(symbol, 1/len(self.symbols))
-            # self.set_holdings(symbol, 1/len(self.symbols)*2) leverage 2x
+        if self.portfolio.invested:
+            self.liquidate()
+
+        if self.enable_trading:
+            for symbol in self.symbols:
+                self.set_holdings(symbol, 1/len(self.symbols))
+                # self.set_holdings(symbol, 1/len(self.symbols)*2) leverage 2x
