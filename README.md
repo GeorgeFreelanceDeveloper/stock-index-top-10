@@ -11,16 +11,16 @@ This algorithm implements a **trend-following strategy** that selects the **top 
 
 | Metric                  | Value         |
 |-------------------------|---------------|
-| CAGR (Annual Return)    | 29.89%        |
-| Max Drawdown            | -45.6%        |
-| Sharpe Ratio            | 0.99          |
+| CAGR (Annual Return)    | 22.7%         |
+| Max Drawdown            | -28.2%        |
+| Sharpe Ratio            | 0.9           |
 | Win Rate (Monthly)      | 55%           |
-| Total Trades            | 520           |
+| Total Trades            | 4236          |
 
 **Backtests last 10 years**
-* [S&P 500 top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24330926/ed812b463f9dfb81a5b24277e56f53d6.pdf)
-* [NASDAQ 100 top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24330926/13e1b016c99da1113c75a12d83d19c9a.pdf)
-* [S&P 500 momentum top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24330926/0f4344a584ed0fd8d1e44e484b3d2290.pdf)
+* [S&P 500 top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/692624d32b117a48857e6e209ede038b.pdf)
+* [NASDAQ 100 top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/e9b4954f12329fd941d9a5f5fb3a5cf9.pdf)
+* [S&P 500 momentum top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/738d2a888ec29b67afb1706a66689932.pdf)
 
 ## 🚀 Strategy Overview
 
