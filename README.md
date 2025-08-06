@@ -21,6 +21,7 @@ This algorithm implements a **trend-following strategy** that selects the **top 
 * [S&P 500 top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/692624d32b117a48857e6e209ede038b.pdf)
 * [NASDAQ 100 top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/e9b4954f12329fd941d9a5f5fb3a5cf9.pdf)
 * [S&P 500 momentum top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/738d2a888ec29b67afb1706a66689932.pdf)
+* [S&P 500 momentum top 10 stocks 2x leverage](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/6e590dbaa9b95d290dcd9b7b2cb567f6.pdf)
 
 ## 🚀 Strategy Overview
 
