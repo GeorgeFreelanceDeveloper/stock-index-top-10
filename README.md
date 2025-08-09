@@ -31,7 +31,7 @@ and highlights the potential volatility of a stock.
 | SmallCap  | 43%           | 45%          | 25.7%              |
 
 > * Backtest Period: Jan 2020 – Feb 2025
-> * Monthly rebalance with filter
+> * Stock-index-top-10 monthly rebalance with filter
 
 ## 🚀 Strategy Overview
 
