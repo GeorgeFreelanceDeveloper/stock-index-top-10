@@ -5,6 +5,7 @@ import datetime
 
 ## Trend follow strategy selecting the top 10 companies from the stock index with weekly/monthly rebalancing equally weighted.
 class StockIndexTop10_V2(QCAlgorithm):
+
     INDEXES = {
         "SP500": ["NVDA", "MSFT", "AAPL", "AMZN", "META", "AVGO", "GOOGL", "BRK.B", "TSLA", "GOOG"], # https://finance.yahoo.com/quote/SPY/holdings/
         "NASDAQ100": ["NVDA", "MSFT", "AAPL", "AMZN", "AVGO", "META", "NFLX", "TSLA", "COST", "GOOGL"], # https://finance.yahoo.com/quote/QQQ/holdings/
@@ -20,14 +21,11 @@ class StockIndexTop10_V2(QCAlgorithm):
         # ********************************
         index = self.get_parameter("index", "SP500 MOMENTUM")
         rebalancing_frequency = self.get_parameter("rebalancing_frequency", "monthly")
-        self.enable_filter = True if (self.get_parameter("enable_filter", "True") == "True") else False
-
-        # Basic settings
-        self.symbols = self.INDEXES[index]
-        self.benchmark_symbol = self.get_parameter("benchmark_symbol", "SPMO")
-        self.add_equity(self.benchmark_symbol, Resolution.DAILY)
-        self.benchmark_sma200 = self.sma(self.benchmark_symbol, 200)
         self.leverage = self.get_parameter("leverage", 0)
+
+        # Filter settings
+        self.enable_filter = True if (self.get_parameter("enable_filter", "True") == "True") else False
+        self.benchmark_symbol = self.get_parameter("benchmark_symbol", "SPMO")
 
         # ********************************
         # Algorithm settings
@@ -36,7 +34,12 @@ class StockIndexTop10_V2(QCAlgorithm):
         # Basic
         self.set_start_date(datetime.date.today().year - 5, 1, 1)
         self.set_cash(10000)
+        self.enable_automatic_indicator_warm_up = True
+
+        self.symbols = self.INDEXES[index]
         self.markets = {symbol: self.add_equity(symbol, Resolution.DAILY) for symbol in self.symbols}
+        self.add_equity(self.benchmark_symbol, Resolution.DAILY)
+        self.benchmark_sma200 = self.sma(self.benchmark_symbol, 200)
         self.enable_trading = True
 
         rebalancing_frequency_internal = self.DateRules.MonthStart(self.symbols[0])
