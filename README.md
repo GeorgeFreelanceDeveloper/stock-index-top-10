@@ -7,21 +7,31 @@ This algorithm implements a **trend-following strategy** that selects the **top 
 ![](resources/strategyEquity.png)
 
 > *Backtest Period: Jan 2015 – Feb 2025*  
-> *(Using S&P500 MOMENTUM index with weekly rebalancing)*
+> *(Using S&P500 MOMENTUM index with monthly rebalancing)*
 
-| Metric                  | Value         |
-|-------------------------|---------------|
-| CAGR (Annual Return)    | 22.7%         |
-| Max Drawdown            | -28.2%        |
-| Sharpe Ratio            | 0.9           |
-| Win Rate (Monthly)      | 55%           |
-| Total Trades            | 4236          |
+### CAGR 
+The compound annual growth rate is the rate of return that an investment would need to have every year 
+in order to grow from its beginning balance to its ending balance, over a given time interval.
 
-**Backtests last 10 years**
-* [S&P 500 top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/692624d32b117a48857e6e209ede038b.pdf)
-* [NASDAQ 100 top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/e9b4954f12329fd941d9a5f5fb3a5cf9.pdf)
-* [S&P 500 momentum top 10 stocks](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/738d2a888ec29b67afb1706a66689932.pdf)
-* [S&P 500 momentum top 10 stocks 2x leverage](https://s3.amazonaws.com/reports.quantconnect.com/344866/24380342/6e590dbaa9b95d290dcd9b7b2cb567f6.pdf)
+| Stocks    | Benchmark ETF | Momentum ETF | Stock-index-top-10 |
+|-----------|---------------|--------------|--------------------|
+| LargeCap  | 16.52%        | 22.23%       | 37.6%              |
+| MidCap    | 13.40%        | 17.67%       | 22.5%              |
+| SmallCap  | 9.91%         | 14.38%       | 23.7%              |
+
+### Max drawdown
+Maximum drawdown is the worst dip an investment takes from a high to a low. 
+Maximum drawdown is an indicator of downside risk over a specified time period 
+and highlights the potential volatility of a stock.
+
+| Stocks    | Benchmark ETF | Momentum ETF | Stock-index-top-10 |
+|-----------|---------------|--------------|--------------------|
+| LargeCap  | 35%           | 32%          | 22%                |
+| MidCap    | 44%           | 40%          | 18.5%              |
+| SmallCap  | 43%           | 45%          | 25.7%              |
+
+> * Backtest Period: Jan 2020 – Feb 2025
+> * Monthly rebalance with filter
 
 ## 🚀 Strategy Overview
 
