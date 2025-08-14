@@ -13,22 +13,25 @@ This algorithm implements a **trend-following strategy** that selects the **top 
 The compound annual growth rate is the rate of return that an investment would need to have every year 
 in order to grow from its beginning balance to its ending balance, over a given time interval.
 
-| Stocks    | Benchmark ETF | Momentum ETF | Stock-index-top-10 |
-|-----------|---------------|--------------|--------------------|
-| LargeCap  | 16.52%        | 22.23%       | 37.6%              |
-| MidCap    | 13.40%        | 17.67%       | 22.5%              |
-| SmallCap  | 9.91%         | 14.38%       | 23.7%              |
+| Stocks   | Benchmark ETF | Momentum ETF | Stock-index-top-10 |
+|----------|---------------|--------------|--------------------|
+| LargeCap | 16.52%        | 22.23%       | 37.6%              |
+| MidCap   | 13.40%        | 17.67%       | 22.5%              |
+| SmallCap | 9.91%         | 14.38%       | 23.7%              |
+| IPOs     | 11.92%        | N/A          | 31.5%              |
+
 
 ### Max drawdown
 Maximum drawdown is the worst dip an investment takes from a high to a low. 
 Maximum drawdown is an indicator of downside risk over a specified time period 
 and highlights the potential volatility of a stock.
 
-| Stocks    | Benchmark ETF | Momentum ETF | Stock-index-top-10 |
-|-----------|---------------|--------------|--------------------|
-| LargeCap  | 35%           | 32%          | 22%                |
-| MidCap    | 44%           | 40%          | 18.5%              |
-| SmallCap  | 43%           | 45%          | 25.7%              |
+| Stocks   | Benchmark ETF | Momentum ETF | Stock-index-top-10 |
+|----------|---------------|--------------|--------------------|
+| LargeCap | 35%           | 32%          | 22%                |
+| MidCap   | 44%           | 40%          | 18.5%              |
+| SmallCap | 43%           | 45%          | 25.7%              |
+| IPOs     | 45%           | N/A          | 29.6%              |
 
 > * Backtest Period: Jan 2020 – Feb 2025
 > * Stock-index-top-10 monthly rebalance with filter

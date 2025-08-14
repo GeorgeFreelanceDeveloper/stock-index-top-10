@@ -5,13 +5,13 @@ import datetime
 
 ## Trend follow strategy selecting the top 10 companies from the stock index with weekly/monthly rebalancing equally weighted.
 class StockIndexTop10_V2(QCAlgorithm):
-
     INDEXES = {
         "SP500": ["NVDA", "MSFT", "AAPL", "AMZN", "META", "AVGO", "GOOGL", "BRK.B", "TSLA", "GOOG"], # https://finance.yahoo.com/quote/SPY/holdings/
         "NASDAQ100": ["NVDA", "MSFT", "AAPL", "AMZN", "AVGO", "META", "NFLX", "TSLA", "COST", "GOOGL"], # https://finance.yahoo.com/quote/QQQ/holdings/
         "SP500 MOMENTUM": ["NVDA", "META", "AMZN", "AVGO", "JPM", "TSLA", "WMT", "NFLX", "PLTR", "COST"], # https://finance.yahoo.com/quote/SPMO/holdings/
         "SP MEDIUM CAP MOMENTUM": ["IBKR", "EME", "SFM", "FIX", "GWRE", "USFD", "CRS", "EQH", "CW", "CASY"], # https://finance.yahoo.com/quote/XMMO/holdings/
-        "SP SMALL CAP MOMENTUM": ["EAT", "CORT", "COOP", "AWI", "IDCC", "SKYW", "JXN", "CALM", "DY", "SMTC"] # https://finance.yahoo.com/quote/XSMO/holdings/
+        "SP SMALL CAP MOMENTUM": ["EAT", "CORT", "COOP", "AWI", "IDCC", "SKYW", "JXN", "CALM", "DY", "SMTC"], # https://finance.yahoo.com/quote/XSMO/holdings/
+        "IPOX 100 US": ["GEV", "PLTR", "APP", "CEG", "RBLX", "DASH", "IBM", "HOOD", "TT", "IOT"] # https://finance.yahoo.com/quote/FPX/
     }
 
     def initialize(self):
