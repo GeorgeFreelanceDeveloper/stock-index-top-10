@@ -46,7 +46,6 @@ class StockIndexTop10_V2(QCAlgorithm):
         # ********************************
         index = self.get_parameter("index", "SP500 MOMENTUM")
         rebalancing_frequency = self.get_parameter("rebalancing_frequency", "monthly")
-        count_stocks = self.get_parameter("count_stocks", 10)
         self.leverage = self.get_parameter("leverage", 0)
 
         # Filter settings
@@ -62,7 +61,7 @@ class StockIndexTop10_V2(QCAlgorithm):
         self.enable_automatic_indicator_warm_up = True
 
         self.benchmark_symbol = self.INDEXES[index]["benchmark_symbol"]
-        self.symbols = self.INDEXES[index]["stocks"][0:count_stocks]
+        self.symbols = self.INDEXES[index]["stocks"]
         self.markets = {symbol: self.add_equity(symbol, Resolution.DAILY) for symbol in self.symbols}
         self.add_equity(self.benchmark_symbol, Resolution.DAILY)
         self.benchmark_sma200 = self.sma(self.benchmark_symbol, 200)
