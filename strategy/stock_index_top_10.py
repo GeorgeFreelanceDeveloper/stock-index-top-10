@@ -39,6 +39,8 @@ class StockIndexTop10_V2(QCAlgorithm):
         }
     }
 
+    BENCHMARK_OLD = "SPY" # before publish new ETFs
+
     def initialize(self):
 
         # ********************************
@@ -56,16 +58,21 @@ class StockIndexTop10_V2(QCAlgorithm):
         # ********************************
 
         # Basic
-        self.set_start_date(datetime.date.today().year - 20, 1, 1)
+        self.set_start_date(datetime.date.today().year - 5, 1, 1)
         self.set_cash(10000)
         self.enable_automatic_indicator_warm_up = True
 
         self.benchmark_symbol = self.INDEXES[index]["benchmark_symbol"]
+        self.benchmark_old_symbol = self.BENCHMARK_OLD
         self.symbols = self.INDEXES[index]["stocks"]
         self.markets = {symbol: self.add_equity(symbol, Resolution.DAILY) for symbol in self.symbols}
         self.add_equity(self.benchmark_symbol, Resolution.DAILY)
-        self.benchmark_sma200 = self.sma(self.benchmark_symbol, 200)
+        self.add_equity(self.benchmark_old_symbol, Resolution.DAILY)
         self.enable_trading = True
+
+        # Init indicators
+        self.benchmark_sma200 = self.sma(self.benchmark_symbol, 200)
+        self.benchmark_old_sma200 = self.sma(self.benchmark_old_symbol, 200)
 
         rebalancing_frequency_internal = self.DateRules.MonthStart(self.symbols[0])
         match rebalancing_frequency:
@@ -93,9 +100,12 @@ class StockIndexTop10_V2(QCAlgorithm):
                     self.enable_trading = False
                 else:
                     self.enable_trading = True
-            else:
-                # Optionally add logging/debugging to help trace missing data
-                self.debug(f"No data for {self.benchmark_symbol} at {self.time}. Skipping filter this bar.")
+            elif self.benchmark_old_symbol in data.bars:
+                bar_benchmark = data.bars[self.benchmark_old_symbol]
+                if bar_benchmark.close < self.benchmark_old_sma200[1].value:
+                    self.enable_trading = False
+                else:
+                    self.enable_trading = True
 
     def _rebalance_portfolio(self):
         if self.portfolio.invested:
