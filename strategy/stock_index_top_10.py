@@ -3,7 +3,7 @@ from AlgorithmImports import *
 import datetime
 # endregion
 
-## Trend follow strategy selecting the top 10 companies from the stock index with weekly/monthly rebalancing equally weighted.
+# Trend follow strategy selecting the top 10 companies from the stock index with weekly, monthly or yearly rebalancing equally weighted when broader market is in uptrend (price is above 200 daily moving average).
 class StockIndexTop10_V2(QCAlgorithm):
 
     INDEXES = {
@@ -56,7 +56,7 @@ class StockIndexTop10_V2(QCAlgorithm):
         # ********************************
 
         # Basic
-        self.set_start_date(datetime.date.today().year - 5, 1, 1)
+        self.set_start_date(datetime.date.today().year - 20, 1, 1)
         self.set_cash(10000)
         self.enable_automatic_indicator_warm_up = True
 
@@ -93,9 +93,9 @@ class StockIndexTop10_V2(QCAlgorithm):
                     self.enable_trading = False
                 else:
                     self.enable_trading = True
-        else:
-            # Optionally add logging/debugging to help trace missing data
-            self.debug(f"No data for {self.benchmark_symbol} at {self.time}. Skipping filter this bar.")
+            else:
+                # Optionally add logging/debugging to help trace missing data
+                self.debug(f"No data for {self.benchmark_symbol} at {self.time}. Skipping filter this bar.")
 
     def _rebalance_portfolio(self):
         if self.portfolio.invested:
